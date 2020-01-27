@@ -9,14 +9,24 @@ ActionList.prototype.addToActionList = function(task) {
 };
 
 ActionList.prototype.deleteListItems = function()	{
-	this.tasks.forEach(function(task, index)	{
-		console.log(task);
-		if (task.done === "checked") {
-			actionList.tasks.splice(index, 1);
-		} else {
-			console.log(task +"- cleared");
+
+	for (let i = 0; i < this.tasks.length; i++) {
+		if(this.tasks[i]){
+			if(this.tasks[i].done === "checked") {
+				delete this.tasks[i];
+			}
 		}
-	}); 
+		
+	}
+
+	// this.tasks.forEach(function(task, index)	{
+	// 	console.log(task);
+	// 	if (task.done === "checked") {
+	// 		actionList.tasks.splice(index, 1);
+	// 	} else {
+	// 		console.log(task +"- cleared");
+	// 	}
+	// }); 
 };
 
 function SingleTask(taskName, notes, date, id, done) {
@@ -81,8 +91,8 @@ $(document).ready(function() {
 
 	$('#delete').click(function(){
 		actionList.deleteListItems();
-		checkBoxListeners();
 		printToDom();
+		checkBoxListeners();
 	});
 	
 	//on click function
